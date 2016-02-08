@@ -2,19 +2,26 @@
 
 This creates a [Docker](http://www.docker.com) image of the [Humhub](https://www.humhub.org) Social Network Kit.
 
-This is a fork of [adminrezo/docker-humhub](https://hub.docker.com/r/adminrezo/docker-humhub/), using a [Turnkeylinux LAMP](https://www.turnkeylinux.org/lampstack) [base image](https://hub.docker.com/r/cboulanger/turnkeylinux-lamp/).
+This is a fork of [cboulanger/humhub-docker](https://hub.docker.com/r/cboulanger/docker-humhub/), using a [Turnkeylinux LAMP](https://www.turnkeylinux.org/lampstack) [base image](https://hub.docker.com/r/cboulanger/turnkeylinux-lamp/).
 
-MySql is configured with a **humhub** database with a **humhub** user with a **HuMhUb** password
+MySQL is configured with a **humhub** database with a **humhub** user with a **HuMhUb** password
 
 ## Howto
 
 Build it:
 
-```docker build -t cboulanger/humhub-docker .```
+```
+git clone git@github.com:krismas/humhub-docker.git
+cd humhub-docker
+git checkout 1.0.0-beta 
+docker build -t ackwa/humhub-docker .
+```
 
 an run it:
 
-```docker run --name humhub -d cboulanger/humhub-docker && docker inspect humhub | grep IPAddress```
+```
+docker run -p 80:80 -p 443:443 --name humhub -d ackwa/humhub-docker
+```
 
 ## Data migration
 
@@ -27,4 +34,4 @@ You can also [migrate data from and to a different container](humhub-data/readme
 
 ## Turnkey Backup et Migration
 - Since the basis of this image is Turnkey Linux, the automated backup tool [TKLBAM](https://www.turnkeylinux.org/docs/tklbam) is available out of the box.
-- If you use TKLBAM, make sure to include any SSL-Certificates in the backup, otherwise the apache server will not start if you restore the backup to another machine. In the current setup, you need to add `/humhub/data/*.crt` and `/humhub-data/*.key` to `/etc/tklbam/overrides`. 
+- If you use TKLBAM, make sure to include any SSL-Certificates in the backup, otherwise the apache server will not start if you restore the backup to another machine. In the current setup, you need to add `/humhub/data/*.crt` and `/humhub-data/*.key` to `/etc/tklbam/overrides`.

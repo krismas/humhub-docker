@@ -1,1 +1,1 @@
-cboulanger/humhub-docker
+ackwa/humhub-docker
