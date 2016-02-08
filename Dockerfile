@@ -19,6 +19,16 @@ RUN tar -xzf $HUMHUB_DIR_NAME.tar.gz && rm $HUMHUB_DIR_NAME.tar.gz
 RUN mv $HUMHUB_DIR_NAME /var/www/humhub
 RUN chown www-data:www-data -R /var/www
 
+# PHP config
+
+ENV POST_MAX_SIZE 20M
+ENV UPLOAD_MAX_FILESIZE 10M
+ENV MEMORY_LIMIT 128M
+
+RUN sed -i -e "s/^post_max_size\s*=.*/post_max_size = $POST_MAX_SIZE/" \
+           -e "s/^upload_max_filesize\s*=.*/upload_max_filesize = $UPLOAD_MAX_FILESIZE/" \
+           -e "s/^memory_limit\s*=.*/memory_limit = $MEMORY_LIMIT/" /etc/php5/apache2/php.ini
+
 # Apache config
 
 ADD pre-conf.sh /pre-conf.sh
