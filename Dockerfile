@@ -15,7 +15,7 @@ ENV HUMHUB_DOWNLOAD_URL http://downloads.sourceforge.net/project/humhub/$HUMHUB_
 
 RUN rm -rf /var/www/*
 RUN wget -q $HUMHUB_DOWNLOAD_URL
-RUN tar -xzf $HUMHUB_DIR_NAME.tar.gz
+RUN tar -xzf $HUMHUB_DIR_NAME.tar.gz && rm $HUMHUB_DIR_NAME.tar.gz
 RUN mv $HUMHUB_DIR_NAME /var/www/humhub
 RUN chown www-data:www-data -R /var/www
 
