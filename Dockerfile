@@ -21,9 +21,9 @@ RUN chown www-data:www-data -R /var/www
 
 # PHP config
 
-ENV POST_MAX_SIZE 20M
-ENV UPLOAD_MAX_FILESIZE 10M
-ENV MEMORY_LIMIT 128M
+ENV POST_MAX_SIZE        20M
+ENV UPLOAD_MAX_FILESIZE  10M
+ENV MEMORY_LIMIT        128M
 
 RUN sed -i -e "s/^post_max_size\s*=.*/post_max_size = $POST_MAX_SIZE/" \
            -e "s/^upload_max_filesize\s*=.*/upload_max_filesize = $UPLOAD_MAX_FILESIZE/" \
